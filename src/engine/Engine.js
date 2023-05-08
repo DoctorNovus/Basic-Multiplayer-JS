@@ -1,4 +1,5 @@
 import { Graphics } from "./Graphics/Graphics";
+import { Movement } from "./Movement/Movement";
 import { Rectangle } from "./Shapes/Rectangle";
 
 export class Engine {
@@ -9,7 +10,8 @@ export class Engine {
     this.ctx = this.canvas.getContext("2d");
 
     this.graphics = new Graphics(this.ctx);
-    this.objects = {};
+    this.movement = new Movement(this.canvas);
+    this.players = new Map();
   }
 
   handleStyle(resX, resY) {
@@ -26,20 +28,17 @@ export class Engine {
   }
 
   handleGraphics() {
-    this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    this.graphics.handleGraphics(this.players);
 
-    for (let x in this.objects) {
-      this.objects[x].draw(this.ctx);
-    }
-
-    // requestAnimationFrame(this.handleGraphics.bind(this));
+    requestAnimationFrame(this.handleGraphics.bind(this));
   }
 
-  rectangle(x, y, w, h, id) {
+  rectangle(x, y, w, h) {
     let r = new Rectangle(x, y, w, h);
-    r.id = id;
-
-    this.objects[id] = r;
     return r;
+  }
+
+  addPlayerToCanvas(obj) {
+    this.players[obj.id] = obj;
   }
 }
