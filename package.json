@@ -1,0 +1,20 @@
+{
+  "name": "economy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/server-cjs.js",
+  "scripts": {
+    "dev": "npm run dev:build && npm run dev:run",
+    "dev:run": "node .",
+    "dev:build": "rollup -c"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "rollup": "^3.21.2"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "ws": "^8.13.0"
+  }
+}
